@@ -1,3 +1,5 @@
 $(document).ready(function(){
-   $('.menu').mobilenavigation();
+   $('.menu').mobilenavigation({
+      viewport: 600,
+   });
 });

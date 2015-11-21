@@ -6,7 +6,7 @@
     //Todo: Add CSS3 animation support
     $.fn.mobilenavigation = function(options) {
 
-        var defaults = {
+        var constants = {
             rootClass: 'mobilenavigation',
             listclassPrefix: 'mobilenavigation__level--',
             dataPrefix: 'mobilenavigation',
@@ -14,20 +14,37 @@
             back: 'Zurück'
         }
 
+        var defaults = {
+            viewport: null,
+            back: 'Zurück'
+        }
+
         var $plugin = this;
         $plugin.settings = {};
 
+        $plugin.initialized = false;
+
         var init = function(){
             $plugin.settings = $.extend({}, defaults, options);
-            Setup.init();
+
+            if($plugin.settings.viewport != null){
+                Setup.resize();
+                $(window).resize(Setup.resize);
+            }else{
+                Setup.init();
+            }
         }
 
         var Setup = {
             init: function(){
-                $plugin.addClass($plugin.settings.rootClass);
-                var $rootList = $plugin.find('ul').first();
-                this.iterateClasses($rootList, 0);
-                Listeners.add();
+                if($plugin.initialized === false){
+                    $plugin.addClass(constants.rootClass);
+                    var $rootList = $plugin.find('ul').first();
+                    this.iterateClasses($rootList, 0);
+                    Listeners.add();
+                    $plugin.initialized = true;
+                }
+
             },
             iterateClasses: function($list, level){
                 if(level > 0){
@@ -38,8 +55,8 @@
                     $('<li><a href="#" class="mobilenavigation__back">'+$plugin.settings.back+'</a></li>').prependTo($list);
                 }
 
-                $list.addClass('mobilenavigation__level '+$plugin.settings.listclassPrefix+level);
-                $list.data($plugin.settings.dataPrefix+'-level', level);
+                $list.addClass('mobilenavigation__level '+constants.listclassPrefix+level);
+                $list.data(constants.dataPrefix+'-level', level);
 
                 level++;
                 var that = this;
@@ -48,21 +65,34 @@
                 });
             },
             destroy: function(){
-                Listeners.remove();
-                $('.mobilenavigation__level').css('left', '');
-                $('.mobilenavigation__back').remove();
-                $('.mobilenavigation__origin').remove();
+                if($plugin.initialized === true){
+                    Listeners.remove();
+                    $('.mobilenavigation__level').css('left', '');
+                    $('.mobilenavigation__back').remove();
+                    $('.mobilenavigation__origin').remove();
+                    $("[class*='mobilenavigation']").removeClass(function(index, css){
+                        return (css.match(/mobilenavigation([^\s]*)/g) || []).join(' ');
+                    });
+                    $plugin.initialized = false;
+                }
+            },
+            resize: function(){
+                if($(window).width() < $plugin.settings.viewport){
+                    Setup.init();
+                }else{
+                    Setup.destroy();
+                }
             }
         }
 
         var Listeners = {
             add: function(){
-                $('.'+$plugin.settings.rootClass).on('click.'+$plugin.settings.eventPrefix+'-forward','.mobilenavigation__has-children > a, .mobilenavigation__has-children > span', function(e){
+                $('.'+constants.rootClass).on('click.'+constants.eventPrefix+'-forward','.mobilenavigation__has-children > a, .mobilenavigation__has-children > span', function(e){
                     e.preventDefault();
                     Animation.forward($(this));
                     console.log("forward");
                 });
-                $('.'+$plugin.settings.rootClass).on('click.'+$plugin.settings.eventPrefix+'-back','.mobilenavigation__back', function(e){
+                $('.'+constants.rootClass).on('click.'+constants.eventPrefix+'-back','.mobilenavigation__back', function(e){
                     e.preventDefault();
                     Animation.back($(this));
                     console.log("back");
@@ -70,8 +100,8 @@
             },
 
             remove: function(){
-                $('.'+$plugin.settings.rootClass).off('click.'+$plugin.settings.eventPrefix+'-forward');
-                $('.'+$plugin.settings.rootClass).off('click.'+$plugin.settings.eventPrefix+'-back');
+                $('.'+constants.rootClass).off('click.'+constants.eventPrefix+'-forward');
+                $('.'+constants.rootClass).off('click.'+constants.eventPrefix+'-back');
 
             }
         }
@@ -79,7 +109,7 @@
         var Animation = {
             forward: function($link){
                 var $list = $link.prev('ul').length ? $link.prev('ul') : $link.next('ul');
-                var level = $list.data($plugin.settings.dataPrefix+'-level');
+                var level = $list.data(constants.dataPrefix+'-level');
                 if(level > 0){
                     $list.addClass('mobilenavigation__level--active');
                     var $parent = $list.parent().closest('.mobilenavigation__level');
@@ -93,7 +123,7 @@
             },
             back: function($link){
                 var $list = $link.closest('ul');
-                var level = $list.data($plugin.settings.dataPrefix+'-level');
+                var level = $list.data(constants.dataPrefix+'-level');
                 var $parent = $list.parent().closest('.mobilenavigation__level');
 
                 if(level > 1){
