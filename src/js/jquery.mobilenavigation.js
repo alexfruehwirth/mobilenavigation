@@ -66,7 +66,7 @@
             onBack: function () {
             },
         }
-
+        // declare instance to own variable to make calls more readable;
         var $plugin = this;
         $plugin.settings = {};
         $plugin.initialized = false;
@@ -96,6 +96,7 @@
                     this.iterateListElements($rootList, 0);
                     Listeners.add();
                     $plugin.initialized = true;
+                    debug("Plugin initialized");
                 }
 
             },
@@ -127,6 +128,7 @@
                         return (css.match(/mobilenavigation([^\s]*)/g) || []).join(' ');
                     });
                     $plugin.initialized = false;
+                    debug("Plugin destroyed");
                 }
             },
             resize: function () {
@@ -178,11 +180,9 @@
                         debug("forward jquery");
                     }
                 }
-
                 $plugin.settings.onForward.call($plugin, $link, level);
-
-
             },
+
             back: function ($link) {
                 var $list = $link.closest('ul');
                 var level = $list.data(constants.dataPrefix + '-level');
@@ -209,14 +209,12 @@
                     }
                     debug("back js");
                 }
-
                 $plugin.settings.onBack.call($plugin, $link, level);
-
             }
         }
-
+        
+        // Private function for debugging.
         var debug = function (obj) {
-            // Private function for debugging.
             if (window.console && window.console.log && $plugin.settings.debug === true) {
                 window.console.log(obj);
             }
@@ -233,9 +231,8 @@
 
         // initialize plugin
         init();
-
+        // return instance to keep the queue alive
         return $plugin;
     };
-
 
 }));
