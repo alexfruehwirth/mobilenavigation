@@ -39,6 +39,8 @@
     }
 }
 (function ($) {
+
+    // TODO: Add callback functions
     $.fn.mobilenavigation = function (options) {
 
         var constants = {
@@ -46,7 +48,6 @@
             listclassPrefix: 'mobilenavigation__level--',
             dataPrefix: 'mobilenavigation',
             eventPrefix: 'mobilenavigation',
-            back: 'Zurück'
         }
 
         var defaults = {
@@ -57,12 +58,13 @@
 
         var $plugin = this;
         $plugin.settings = {};
-
         $plugin.initialized = false;
 
+        // Initializes whole plugin
         var init = function () {
             $plugin.settings = $.extend({}, defaults, options);
 
+            //If breakpoint is set in options, initialize on resize for set breakpoint
             if ($plugin.settings.breakpoint != null) {
                 Setup.resize();
                 $(window).resize(Setup.resize);
@@ -71,6 +73,7 @@
             }
         }
 
+        //Sets up menu structure
         var Setup = {
             init: function () {
                 if ($plugin.initialized === false) {
@@ -79,13 +82,13 @@
                         $plugin.addClass("mobilenavigation--css3-enabled");
                     }
                     var $rootList = $plugin.find('ul').first();
-                    this.iterateClasses($rootList, 0);
+                    this.iterateListElements($rootList, 0);
                     Listeners.add();
                     $plugin.initialized = true;
                 }
 
             },
-            iterateClasses: function ($list, level) {
+            iterateListElements: function ($list, level) {
                 if (level > 0) {
                     $list.closest('li').addClass('mobilenavigation__has-children');
                     var $link = $list.prev('a').length ? $list.prev('a') : $list.next('a');
@@ -100,7 +103,7 @@
                 level++;
                 var that = this;
                 $list.children('li').each(function () {
-                    that.iterateClasses($(this).find('ul').first(), level);
+                    that.iterateListElements($(this).find('ul').first(), level);
                 });
             },
             destroy: function () {
@@ -162,7 +165,6 @@
                             $parent.animate({left: '-100%'});
                         }
                     }
-
                 }
             },
             back: function ($link) {
@@ -189,8 +191,6 @@
                         });
                     }
                 }
-
-
             }
         }
 
