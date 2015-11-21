@@ -2,35 +2,22 @@
   width: 100%;
   position: absolute;
   top: 0;
-  left: 0; }
-  .mobilenavigation__level--1 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--2 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--3 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--4 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--5 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--6 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--7 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--8 {
-    left: 100%;
-    display: none; }
-  .mobilenavigation__level--9 {
-    left: 100%;
-    display: none; }
+  left: 100%;
+  display: none; }
+  .mobilenavigation__level--0 {
+    left: 0;
+    display: block; }
   .mobilenavigation__level--active {
     display: block; }
+.mobilenavigation--css3-enabled .mobilenavigation__level {
+  -webkit-transition: left ease-in-out 0.2s;
+  -moz-transition: left ease-in-out 0.2s;
+  -ms-transition: left ease-in-out 0.2s;
+  -o-transition: left ease-in-out 0.2s;
+  transition: left ease-in-out 0.2s; }
+  .mobilenavigation--css3-enabled .mobilenavigation__level--left.mobilenavigation__level {
+    left: 0; }
+    .mobilenavigation--css3-enabled .mobilenavigation__level--left.mobilenavigation__level--0 {
+      left: -100%; }
 
 /*# sourceMappingURL=jquery.mobilenavigation.css.map */

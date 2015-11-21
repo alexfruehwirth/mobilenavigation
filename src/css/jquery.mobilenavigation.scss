@@ -2,11 +2,11 @@
   &__level{
     width: 100%;
     position: absolute;
-    top:;
+    top:0;
     left: 100%;
     display: none;
 
-    &--1{
+    &--0{
       left: 0;
       display: block;
     }
@@ -15,5 +15,23 @@
       display: block;
     }
 
+  }
+
+  &--css3-enabled{
+    .mobilenavigation__level{
+      -webkit-transition: left ease-in-out 0.2s;
+      -moz-transition: left ease-in-out 0.2s;
+      -ms-transition: left ease-in-out 0.2s;
+      -o-transition: left ease-in-out 0.2s;
+      transition: left ease-in-out 0.2s;
+      &--left{
+        &.mobilenavigation__level{
+          left: 0;
+          &--0{
+            left: -100%;
+          }
+        }
+      }
+    }
   }
 }
