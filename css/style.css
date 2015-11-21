@@ -82,7 +82,8 @@ h1 {
   .intro__wrapper {
     width: 100%; }
   .intro h1 {
-    display: block; }
+    display: block;
+    font-size: 2em; }
   .intro h2 {
     text-align: center;
     margin-top: 20px;
@@ -120,25 +121,60 @@ h1 {
   font-family: 'Source Code Pro', sans-serif;
   font-size: 1em; }
 
-.menu .list {
-  background-color: #2196F3; }
-  .menu .list a {
-    color: #FFFFFF;
-    display: block;
-    text-align: center;
-    font-size: 1.3em;
-    line-height: 30px;
-    -webkit-transition: background-color ease-in-out 0.2s;
-    -moz-transition: background-color ease-in-out 0.2s;
-    -ms-transition: background-color ease-in-out 0.2s;
-    -o-transition: background-color ease-in-out 0.2s;
-    transition: background-color ease-in-out 0.2s; }
-    .menu .list a:hover {
-      background-color: #8BC34A; }
+.burger {
+  width: 100%;
+  height: 100%; }
+  .burger__stripe {
+    width: 100%;
+    height: 8px;
+    background-color: #212121;
+    margin-top: 5px; }
+    .burger__stripe--top {
+      margin-top: 7px; }
 
+.menu {
+  height: 50px; }
+  .menu__toggle {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: #1976D2;
+    float: left;
+    border: 0;
+    -webkit-appearance: none; }
+    .menu__toggle:focus {
+      outline: none; }
+  .menu .list {
+    background-color: #2196F3; }
+    .menu .list--level-1 {
+      top: 50px;
+      z-index: 500;
+      display: none; }
+    .menu .list--open {
+      display: block; }
+    .menu .list a {
+      color: #FFFFFF;
+      display: block;
+      text-align: center;
+      font-size: 1.3em;
+      line-height: 30px;
+      -webkit-transition: background-color ease-in-out 0.2s;
+      -moz-transition: background-color ease-in-out 0.2s;
+      -ms-transition: background-color ease-in-out 0.2s;
+      -o-transition: background-color ease-in-out 0.2s;
+      transition: background-color ease-in-out 0.2s; }
+      .menu .list a:hover {
+        background-color: #8BC34A; }
+
+@media only screen and (min-width: 481px) {
+  .intro h1 {
+    font-size: 3em; } }
 @media only screen and (min-width: 769px) {
   .menu {
-    height: 50px; }
+    height: 50px;
+    z-index: 500; }
+    .menu__toggle {
+      display: none; }
     .menu .list {
       display: none;
       position: absolute;
