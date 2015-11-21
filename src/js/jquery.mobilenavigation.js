@@ -1,5 +1,9 @@
 (function( $ ) {
 
+
+    //Todo: Add AMD (requireJs) support
+    //Todo: Add velocity support
+    //Todo: Add CSS3 animation support
     $.fn.mobilenavigation = function(options) {
 
         var defaults = {
@@ -7,10 +11,10 @@
             listclassPrefix: 'mobilenavigation__level--',
             dataPrefix: 'mobilenavigation',
             eventPrefix: 'mobilenavigation',
+            back: 'Zurück'
         }
 
         var $plugin = this;
-
         $plugin.settings = {};
 
         var init = function(){
@@ -31,7 +35,7 @@
                     var $link = $list.prev('a').length ? $list.prev('a') : $list.next('a');
                     var $orginList = $('<li class="mobilenavigation__origin" ></li>').prependTo($list);
                     $link.clone().prependTo($orginList);
-                    $('<li><a href="#" class="mobilenavigation__back">Zurück</a></li>').prependTo($list);
+                    $('<li><a href="#" class="mobilenavigation__back">'+$plugin.settings.back+'</a></li>').prependTo($list);
                 }
 
                 $list.addClass('mobilenavigation__level '+$plugin.settings.listclassPrefix+level);
@@ -46,6 +50,8 @@
             destroy: function(){
                 Listeners.remove();
                 $('.mobilenavigation__level').css('left', '');
+                $('.mobilenavigation__back').remove();
+                $('.mobilenavigation__origin').remove();
             }
         }
 
@@ -99,7 +105,6 @@
                 }else{
                     $parent.animate({left: 0},function(){
                         $list.removeClass('mobilenavigation__level--active');
-
                     });
                 }
 
