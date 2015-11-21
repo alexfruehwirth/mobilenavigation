@@ -132,9 +132,12 @@ h1 {
     .burger__stripe--top {
       margin-top: 7px; }
 
+body {
+  overflow: hidden; }
+
 .menu {
-  overflow: hidden;
-  height: 50px; }
+  height: 50px;
+  width: 100%; }
   .menu__toggle {
     display: block;
     width: 50px;
