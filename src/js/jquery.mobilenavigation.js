@@ -5,7 +5,7 @@
  *
  *  author: alexfruehwirth
  *  repo: https://github.com/alexfruewhwirth/mobilenavigation
- *  version: 0.2
+ *  version: 0.8
  */
 
 
@@ -61,6 +61,8 @@
             breakpoint: null,
             back: 'Back',
             cssAnimation: true,
+            onForward: function(){},
+            onBack: function(){},
         }
 
         var $plugin = this;
@@ -171,6 +173,10 @@
                         }
                     }
                 }
+
+                $plugin.settings.onForward.call($plugin, $link, level);
+
+
             },
             back: function ($link) {
                 var $list = $link.closest('ul');
@@ -196,6 +202,9 @@
                         });
                     }
                 }
+
+                $plugin.settings.onBack.call($plugin, $link, level);
+
             }
         }
 
