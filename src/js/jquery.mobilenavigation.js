@@ -59,7 +59,7 @@
 
         var defaults = {
             breakpoint: null,
-            back: 'Zurück',
+            back: 'Back',
             cssAnimation: true,
         }
 
