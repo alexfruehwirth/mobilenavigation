@@ -133,6 +133,7 @@ h1 {
       margin-top: 7px; }
 
 .menu {
+  position: relative;
   height: 50px; }
   .menu__toggle {
     display: block;
