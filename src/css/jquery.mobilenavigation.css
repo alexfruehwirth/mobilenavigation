@@ -10,11 +10,11 @@
   .mobilenavigation__level--active {
     display: block; }
 .mobilenavigation--css3-enabled .mobilenavigation__level {
-  -webkit-transition: left ease-in-out 0.2s;
-  -moz-transition: left ease-in-out 0.2s;
-  -ms-transition: left ease-in-out 0.2s;
-  -o-transition: left ease-in-out 0.2s;
-  transition: left ease-in-out 0.2s; }
+  -webkit-transition: left ease-in-out 0.5s;
+  -moz-transition: left ease-in-out 0.5s;
+  -ms-transition: left ease-in-out 0.5s;
+  -o-transition: left ease-in-out 0.5s;
+  transition: left ease-in-out 0.5s; }
   .mobilenavigation--css3-enabled .mobilenavigation__level--left.mobilenavigation__level {
     left: 0; }
     .mobilenavigation--css3-enabled .mobilenavigation__level--left.mobilenavigation__level--0 {

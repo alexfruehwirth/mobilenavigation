@@ -192,7 +192,7 @@
                     $parent.removeClass(constants.leftClass);
                     setTimeout(function () {
                         $list.removeClass(constants.activeClass);
-                    }, 200);
+                    }, 500);
                     debug("back css");
 
                 } else {
@@ -212,7 +212,7 @@
                 $plugin.settings.onBack.call($plugin, $link, level);
             }
         }
-        
+
         // Private function for debugging.
         var debug = function (obj) {
             if (window.console && window.console.log && $plugin.settings.debug === true) {
