@@ -1,8 +1,13 @@
+/*!
+ *  mobilenavigation jQuery plugin
+ *
+ *  Plugin for a sliding mobilenavigation
+ *
+ *  author: alexfrueh
+ */
+
 (function ($) {
-
-
     //Todo: Add AMD (requireJs) support
-    //Todo: Add velocity support
     $.fn.mobilenavigation = function (options) {
 
         var constants = {
@@ -14,7 +19,7 @@
         }
 
         var defaults = {
-            viewport: null,
+            breakpoint: null,
             back: 'Zurück',
             cssAnimation: true,
         }
@@ -27,7 +32,7 @@
         var init = function () {
             $plugin.settings = $.extend({}, defaults, options);
 
-            if ($plugin.settings.viewport != null) {
+            if ($plugin.settings.breakpoint != null) {
                 Setup.resize();
                 $(window).resize(Setup.resize);
             } else {
@@ -39,7 +44,7 @@
             init: function () {
                 if ($plugin.initialized === false) {
                     $plugin.addClass(constants.rootClass);
-                    if($plugin.settings.cssAnimation === true){
+                    if ($plugin.settings.cssAnimation === true) {
                         $plugin.addClass("mobilenavigation--css3-enabled");
                     }
                     var $rootList = $plugin.find('ul').first();
@@ -80,7 +85,7 @@
                 }
             },
             resize: function () {
-                if ($(window).width() < $plugin.settings.viewport) {
+                if ($(window).width() < $plugin.settings.breakpoint) {
                     Setup.init();
                 } else {
                     Setup.destroy();
@@ -136,9 +141,11 @@
 
                 if ($plugin.settings.cssAnimation === true) {
                     $parent.removeClass('mobilenavigation__level--left');
-                    setTimeout(function(){$list.removeClass('mobilenavigation__level--active');}, 200);
+                    setTimeout(function () {
+                        $list.removeClass('mobilenavigation__level--active');
+                    }, 200);
 
-                }else{
+                } else {
                     if (level > 1) {
                         $parent.animate({left: '100%'},
                             function () {
