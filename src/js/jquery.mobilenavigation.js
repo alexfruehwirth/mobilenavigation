@@ -141,14 +141,18 @@
             }
         }
 
-
         $plugin.destroy = function(){
             Setup.destroy();
         }
 
+        $plugin.reinit = function(){
+            init();
+        }
 
         // initialize plugin
         init();
+
+        return $plugin;
     };
 
 
