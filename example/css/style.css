@@ -47,10 +47,58 @@ table {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 18px; }
+  font-size: 1em;
+  background-color: #C5CAE9; }
 
 a {
   color: #000;
   text-decoration: none; }
+
+.menu .list {
+  background-color: #3F51B5; }
+  .menu .list a {
+    color: #FFFFFF;
+    display: block;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 30px;
+    -webkit-transition: background-color ease-in-out 0.2s;
+    -moz-transition: background-color ease-in-out 0.2s;
+    -ms-transition: background-color ease-in-out 0.2s;
+    -o-transition: background-color ease-in-out 0.2s;
+    transition: background-color ease-in-out 0.2s; }
+    .menu .list a:hover {
+      background-color: #009688; }
+
+@media only screen and (min-width: 769px) {
+  .menu {
+    height: 50px; }
+    .menu .list {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      width: 100%; }
+      .menu .list--level-1 {
+        display: block;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #303F9F; }
+        .menu .list--level-1 > li {
+          flex: 1;
+          height: 100%; }
+          .menu .list--level-1 > li > a {
+            font-size: 1.5em;
+            line-height: 50px; }
+      .menu .list--level-2 {
+        top: 50px;
+        left: 0; }
+      .menu .list > li {
+        position: relative; }
+        .menu .list > li:hover > ul {
+          display: block; } }
 
 /*# sourceMappingURL=style.css.map */

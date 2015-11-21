@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   $('.menu').mobilenavigation({
-      viewport: 600,
+   var $nav = $('.menu').mobilenavigation({
+      viewport: 768
    });
 });
