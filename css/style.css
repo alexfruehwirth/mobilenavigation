@@ -46,16 +46,82 @@ table {
   border-spacing: 0; }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'ABeeZee', sans-serif;
   font-size: 1em;
-  background-color: #C5CAE9; }
+  background-color: #BBDEFB; }
 
 a {
   color: #000;
   text-decoration: none; }
 
+h1 {
+  font-family: 'Bitter', serif;
+  font-size: 3em;
+  text-align: center; }
+
+.section:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.narrow {
+  margin: 0 auto;
+  max-width: 1024px; }
+  .narrow:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.intro {
+  background-color: #FFF;
+  border-bottom: 5px solid #B6B6B6;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .intro__wrapper {
+    width: 100%; }
+  .intro h1 {
+    display: block; }
+  .intro h2 {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    position: relative; }
+    .intro h2:before {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 2px;
+      width: 200px;
+      top: 0;
+      left: 50%;
+      margin-left: -100px;
+      background-color: #B6B6B6; }
+  .intro .codesnippet {
+    width: 320px;
+    margin: 100px auto 0 auto;
+    text-align: center; }
+
+.howto {
+  background-color: #2196F3;
+  border-bottom: 5px solid #B6B6B6;
+  overflow: hidden; }
+  .howto__wrapper {
+    width: 100%; }
+  .howto__step {
+    margin: 30px 0; }
+  .howto__headline {
+    font-family: 'Bitter', serif;
+    font-size: 1.5em;
+    text-align: center; }
+
+.codesnippet {
+  font-family: 'Source Code Pro', sans-serif;
+  font-size: 1em; }
+
 .menu .list {
-  background-color: #3F51B5; }
+  background-color: #2196F3; }
   .menu .list a {
     color: #FFFFFF;
     display: block;
@@ -68,7 +134,7 @@ a {
     -o-transition: background-color ease-in-out 0.2s;
     transition: background-color ease-in-out 0.2s; }
     .menu .list a:hover {
-      background-color: #009688; }
+      background-color: #8BC34A; }
 
 @media only screen and (min-width: 769px) {
   .menu {
@@ -86,7 +152,7 @@ a {
         left: 0;
         width: 100%;
         height: 50px;
-        background-color: #303F9F; }
+        background-color: #1976D2; }
         .menu .list--level-1 > li {
           flex: 1;
           height: 100%; }

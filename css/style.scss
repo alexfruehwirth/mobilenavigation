@@ -47,9 +47,26 @@ table {
   border-spacing: 0;
 }
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin headline-font($font-size: 2em){
+  font-family: 'Bitter', serif;
+  font-size: $font-size;
+}
 
 @mixin content-font($font-size: 1em){
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'ABeeZee', sans-serif;
+  font-size: $font-size;
+}
+
+@mixin code-font($font-size: 1em){
+  font-family: 'Source Code Pro', sans-serif;
   font-size: $font-size;
 }
 
@@ -62,6 +79,14 @@ $primary-text-color:   #212121;
 $secondary-text-color: #727272;
 $divider-color:        #B6B6B6;
 
+$primary-color-dark:   #1976D2;
+$primary-color:        #2196F3;
+$primary-color-light:  #BBDEFB;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #8BC34A;
+$primary-text-color:   #212121;
+$secondary-text-color: #727272;
+$divider-color:        #B6B6B6;
 
 
 body{
@@ -72,6 +97,92 @@ body{
 a{
   color: #000;
   text-decoration: none;
+}
+
+h1{
+  @include headline-font(3em);
+  text-align: center;
+
+}
+
+.section{
+  @include clearfix;
+}
+
+.narrow{
+  margin: 0 auto;
+  max-width: 1024px;
+  @include clearfix;
+
+}
+
+.intro{
+  background-color: #FFF;
+  border-bottom: 5px solid $divider-color;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &__wrapper{
+    width: 100%;
+  }
+
+  h1{
+    display: block;
+  }
+
+  h2{
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    position: relative;
+
+    &:before{
+      content: "";
+      position: absolute;
+      display: block;
+      height: 2px;
+      width: 200px;
+      top: 0;
+      left: 50%;
+      margin-left: -100px;
+      background-color: $divider-color;
+    }
+  }
+
+  .codesnippet{
+    width: 320px;
+    margin: 100px auto 0 auto;
+    text-align: center;
+  }
+}
+
+.howto{
+  background-color: $primary-color;
+  border-bottom: 5px solid $divider-color;
+  overflow: hidden;
+  &__wrapper{
+    width: 100%;
+  }
+
+  &__step{
+    margin: 30px 0;
+  }
+
+  &__headline{
+    @include headline-font(1.5em);
+    text-align: center;
+  }
+
+  &__box{
+
+  }
+}
+
+.codesnippet{
+  @include code-font();
 }
 
 

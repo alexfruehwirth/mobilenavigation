@@ -41,6 +41,8 @@
 (function ($) {
 
     // TODO: Add callback functions
+    // TODO: Refactor constants (add string as variables etc.)
+    // TODO: add support for overriding options via data-attributes
     $.fn.mobilenavigation = function (options) {
 
         var constants = {
@@ -52,7 +54,7 @@
 
         var defaults = {
             breakpoint: null,
-            back: 'Zurück',
+            back: 'Back',
             cssAnimation: true,
         }
 
