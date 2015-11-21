@@ -40,7 +40,6 @@
 }
 (function ($) {
 
-    // TODO: Add callback functions
     $.fn.mobilenavigation = function (options) {
 
         var constants = {
@@ -61,8 +60,11 @@
             breakpoint: null,
             back: 'Back',
             cssAnimation: true,
-            onForward: function(){},
-            onBack: function(){},
+            debug: false,
+            onForward: function () {
+            },
+            onBack: function () {
+            },
         }
 
         var $plugin = this;
@@ -118,9 +120,9 @@
             destroy: function () {
                 if ($plugin.initialized === true) {
                     Listeners.remove();
-                    $('.'+constants.levelClass).css('left', '');
-                    $('.'+constants.backClass).remove();
-                    $('.'+constants.originClass).remove();
+                    $('.' + constants.levelClass).css('left', '');
+                    $('.' + constants.backClass).remove();
+                    $('.' + constants.originClass).remove();
                     $("[class*='mobilenavigation']").removeClass(function (index, css) {
                         return (css.match(/mobilenavigation([^\s]*)/g) || []).join(' ');
                     });
@@ -138,20 +140,21 @@
 
         var Listeners = {
             add: function () {
-                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-forward', '.'+constants.hasChildrenClass+' > a, .'+constants.hasChildrenClass+'-children > span', function (e) {
+                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-forward', '.' + constants.hasChildrenClass + ' > a, .' + constants.hasChildrenClass + '-children > span', function (e) {
                     e.preventDefault();
                     Animation.forward($(this));
                 });
-                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.'+constants.backClass, function (e) {
+                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.' + constants.backClass, function (e) {
                     e.preventDefault();
                     Animation.back($(this));
                 });
+                debug("listeners added");
             },
 
             remove: function () {
                 $('.' + constants.rootClass).off('click.' + constants.eventPrefix + '-forward');
                 $('.' + constants.rootClass).off('click.' + constants.eventPrefix + '-back');
-
+                debug("listeners removed");
             }
         }
 
@@ -161,16 +164,18 @@
                 var level = $list.data(constants.dataPrefix + '-level');
                 if (level > 0) {
                     $list.addClass(constants.activeClass);
-                    var $parent = $list.parent().closest('.'+constants.levelClass);
+                    var $parent = $list.parent().closest('.' + constants.levelClass);
 
                     if ($plugin.settings.cssAnimation === true) {
                         $parent.addClass(constants.leftClass);
+                        debug("forward css");
                     } else {
                         if (level > 1) {
                             $parent.animate({left: 0});
                         } else {
                             $parent.animate({left: '-100%'});
                         }
+                        debug("forward jquery");
                     }
                 }
 
@@ -181,13 +186,14 @@
             back: function ($link) {
                 var $list = $link.closest('ul');
                 var level = $list.data(constants.dataPrefix + '-level');
-                var $parent = $list.parent().closest('.'+constants.levelClass);
+                var $parent = $list.parent().closest('.' + constants.levelClass);
 
                 if ($plugin.settings.cssAnimation === true) {
                     $parent.removeClass(constants.leftClass);
                     setTimeout(function () {
                         $list.removeClass(constants.activeClass);
                     }, 200);
+                    debug("back css");
 
                 } else {
                     if (level > 1) {
@@ -201,11 +207,20 @@
                             $list.removeClass(constants.activeClass);
                         });
                     }
+                    debug("back js");
                 }
 
                 $plugin.settings.onBack.call($plugin, $link, level);
 
             }
+        }
+
+        var debug = function (obj) {
+            // Private function for debugging.
+            if (window.console && window.console.log && $plugin.settings.debug === true) {
+                window.console.log(obj);
+            }
+
         }
 
         $plugin.destroy = function () {
