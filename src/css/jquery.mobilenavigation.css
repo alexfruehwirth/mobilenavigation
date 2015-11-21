@@ -4,22 +4,33 @@
   top: 0;
   left: 0; }
   .mobilenavigation__level--1 {
-    left: 100%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--2 {
-    left: 200%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--3 {
-    left: 300%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--4 {
-    left: 400%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--5 {
-    left: 500%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--6 {
-    left: 600%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--7 {
-    left: 700%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--8 {
-    left: 800%; }
+    left: 100%;
+    display: none; }
   .mobilenavigation__level--9 {
-    left: 900%; }
+    left: 100%;
+    display: none; }
+  .mobilenavigation__level--active {
+    display: block; }
 
 /*# sourceMappingURL=jquery.mobilenavigation.css.map */

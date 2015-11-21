@@ -7,8 +7,13 @@
 
     @for $i from 1 to 10{
       &--#{$i}{
-        left: 100% * $i;
+        left: 100%;
+        display: none;
       }
+    }
+
+    &--active{
+      display: block;
     }
 
   }
