@@ -17,13 +17,13 @@
         define(['jquery'], factory);
     } else if (typeof module === 'object' && module.exports) {
         // Node/CommonJS
-        module.exports = function( root, jQuery ) {
-            if ( jQuery === undefined ) {
+        module.exports = function (root, jQuery) {
+            if (jQuery === undefined) {
                 // require('jQuery') returns a factory that requires window to
                 // build a jQuery instance, we normalize how we use modules
                 // that require this pattern but the window provided is a noop
                 // if it's defined (how jquery works)
-                if ( typeof window !== 'undefined' ) {
+                if (typeof window !== 'undefined') {
                     jQuery = require('jquery');
                 }
                 else {
@@ -45,7 +45,14 @@
 
         var constants = {
             rootClass: 'mobilenavigation',
+            levelClass: 'mobilenavigation__level',
             listclassPrefix: 'mobilenavigation__level--',
+            backClass: 'mobilenavigation__back',
+            originClass: 'mobilenavigation__origin',
+            activeClass: 'mobilenavigation__level--active',
+            cssEnabledClass: 'mobilenavigation--css3-enabled',
+            leftClass: 'mobilenavigation__level--left',
+            hasChildrenClass: 'mobilenavigation_level--has-children',
             dataPrefix: 'mobilenavigation',
             eventPrefix: 'mobilenavigation',
         }
@@ -79,7 +86,7 @@
                 if ($plugin.initialized === false) {
                     $plugin.addClass(constants.rootClass);
                     if ($plugin.settings.cssAnimation === true) {
-                        $plugin.addClass("mobilenavigation--css3-enabled");
+                        $plugin.addClass(constants.cssEnabledClass);
                     }
                     var $rootList = $plugin.find('ul').first();
                     this.iterateListElements($rootList, 0);
@@ -90,14 +97,14 @@
             },
             iterateListElements: function ($list, level) {
                 if (level > 0) {
-                    $list.closest('li').addClass('mobilenavigation__has-children');
+                    $list.closest('li').addClass(constants.hasChildrenClass);
                     var $link = $list.prev('a').length ? $list.prev('a') : $list.next('a');
-                    var $orginList = $('<li class="mobilenavigation__origin" ></li>').prependTo($list);
+                    var $orginList = $('<li class="' + constants.originClass + '" ></li>').prependTo($list);
                     $link.clone().prependTo($orginList);
-                    $('<li><a href="#" class="mobilenavigation__back">' + $plugin.settings.back + '</a></li>').prependTo($list);
+                    $('<li><a href="#" class="' + constants.backClass + '">' + $plugin.settings.back + '</a></li>').prependTo($list);
                 }
 
-                $list.addClass('mobilenavigation__level ' + constants.listclassPrefix + level);
+                $list.addClass(constants.levelClass + ' ' + constants.levelClass + '--' + level);
                 $list.data(constants.dataPrefix + '-level', level);
 
                 level++;
@@ -109,9 +116,9 @@
             destroy: function () {
                 if ($plugin.initialized === true) {
                     Listeners.remove();
-                    $('.mobilenavigation__level').css('left', '');
-                    $('.mobilenavigation__back').remove();
-                    $('.mobilenavigation__origin').remove();
+                    $('.'+constants.levelClass).css('left', '');
+                    $('.'+constants.backClass).remove();
+                    $('.'+constants.originClass).remove();
                     $("[class*='mobilenavigation']").removeClass(function (index, css) {
                         return (css.match(/mobilenavigation([^\s]*)/g) || []).join(' ');
                     });
@@ -129,15 +136,13 @@
 
         var Listeners = {
             add: function () {
-                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-forward', '.mobilenavigation__has-children > a, .mobilenavigation__has-children > span', function (e) {
+                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-forward', '.'+constants.hasChildrenClass+' > a, .'+constants.hasChildrenClass+'-children > span', function (e) {
                     e.preventDefault();
                     Animation.forward($(this));
-                    console.log("forward");
                 });
-                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.mobilenavigation__back', function (e) {
+                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.'+constants.backClass, function (e) {
                     e.preventDefault();
                     Animation.back($(this));
-                    console.log("back");
                 });
             },
 
@@ -153,11 +158,11 @@
                 var $list = $link.prev('ul').length ? $link.prev('ul') : $link.next('ul');
                 var level = $list.data(constants.dataPrefix + '-level');
                 if (level > 0) {
-                    $list.addClass('mobilenavigation__level--active');
-                    var $parent = $list.parent().closest('.mobilenavigation__level');
+                    $list.addClass(constants.activeClass);
+                    var $parent = $list.parent().closest('.'+constants.levelClass);
 
                     if ($plugin.settings.cssAnimation === true) {
-                        $parent.addClass('mobilenavigation__level--left');
+                        $parent.addClass(constants.leftClass);
                     } else {
                         if (level > 1) {
                             $parent.animate({left: 0});
@@ -170,24 +175,24 @@
             back: function ($link) {
                 var $list = $link.closest('ul');
                 var level = $list.data(constants.dataPrefix + '-level');
-                var $parent = $list.parent().closest('.mobilenavigation__level');
+                var $parent = $list.parent().closest('.'+constants.levelClass);
 
                 if ($plugin.settings.cssAnimation === true) {
-                    $parent.removeClass('mobilenavigation__level--left');
+                    $parent.removeClass(constants.leftClass);
                     setTimeout(function () {
-                        $list.removeClass('mobilenavigation__level--active');
+                        $list.removeClass(constants.activeClass);
                     }, 200);
 
                 } else {
                     if (level > 1) {
                         $parent.animate({left: '100%'},
                             function () {
-                                $list.removeClass('mobilenavigation__level--active');
+                                $list.removeClass(constants.activeClass);
 
                             });
                     } else {
                         $parent.animate({left: 0}, function () {
-                            $list.removeClass('mobilenavigation__level--active');
+                            $list.removeClass(constants.activeClass);
                         });
                     }
                 }
