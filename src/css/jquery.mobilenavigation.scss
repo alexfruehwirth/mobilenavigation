@@ -2,14 +2,13 @@
   &__level{
     width: 100%;
     position: absolute;
-    top:0;
-    left: 0;
+    top:;
+    left: 100%;
+    display: none;
 
-    @for $i from 1 to 10{
-      &--#{$i}{
-        left: 100%;
-        display: none;
-      }
+    &--1{
+      left: 0;
+      display: block;
     }
 
     &--active{
