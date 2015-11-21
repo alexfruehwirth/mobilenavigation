@@ -204,7 +204,7 @@ h1{
 }
 
 .menu{
-  position: relative;
+  overflow:hidden;
   height: 50px;
   &__toggle{
     display: block;
