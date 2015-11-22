@@ -21,41 +21,7 @@
         </button>
         <ul class="list list--level-1">
             <li>
-                <a href="#">Link</a>
-                <ul class="list list--level-2">
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Link</a>
-                <ul class="list list--level-2">
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Link</a>
-            </li>
-            <li>
-                <a href="#">Link</a>
-            </li>
-            <li>
-                <a href="#">Link 2</a>
+                <a href="#">Deep structures</a>
                 <ul class="list list--level-2">
                     <li>
                         <a href="#">Link</a>
@@ -114,11 +80,28 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Link</a>
+                <a href="#">or only one level</a>
+                <ul class="list list--level-2">
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="#">Link</a>
+                <a href="#">Simple links</a>
             </li>
+
+
+            <li>
+                <a href="#">without children</a>
+            </li>
+
         </ul>
     </nav>
 </header>
@@ -134,14 +117,62 @@
             </div>
         </div>
     </section>
-    <section class="section section--howto howto">
+    <section class="section section--embedding howto">
         <div class="howto__wrapper narrow">
             <div class="howto__step">
-                <h2 class="howto__headline">How-To coming soon</h2>
+                <h2 class="howto__headline">1. Embedding</h2>
+                <p class="howto__description"><i>mobilenavigation</i> supports multiple ways of embedding. The classic way via the script and link tag,  </p>
+                <div class="howto__box codesnippet">
+
+                        &lt;script src="{YOUR_PATH}/jquery.mobilenavigation.js" type="text/javascript"&gt; &lt;/script&gt; <br/><br/>
+                        &lt;link href="{YOUR_PATH}/jquery.mobilenavigation.js" type="text/css" rel="stylesheet" /&gt;
+
+                </div>
+                <p class="howto__description">as well as loading it via a script loader. <i>mobilenavigation</i> implements <a href="https://github.com/umdjs/umd" target="_blank">UMD</a> to achive this.</p>
+                <div class="howto__box codesnippet">
+
+                    requirejs.config({<br/>
+                    &nbsp;&nbsp;paths: {<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;jquery: '//code.jquery.com/jquery-2.1.4',<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;mobilenavigation: '../src/js/jquery.mobilenavigation'<br/>
+                    &nbsp;&nbsp;}<br/>
+                    });<br/>
+                </div>
             </div>
             </div>
         </div>
     </section>
+    <section class="section section--initalizing howto">
+        <div class="howto__wrapper narrow">
+            <div class="howto__step">
+                <h2 class="howto__headline">2. Initializing</h2>
+                <p class="howto__description">just initialize the plugin inside your jquery application</p>
+                <div class="howto__box codesnippet">
+
+                    $('nav').mobilenavigation();
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="section section--options howto">
+        <div class="howto__wrapper narrow">
+            <div class="howto__step">
+                <h2 class="howto__headline">Options</h2>
+                <p class="howto__description"><i>mobilenavigation</i> supports several options</p>
+                <div class="howto__box codesnippet">
+
+                    docu coming soon
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
 </main>
+<footer>
+    made by <a href="http://www.alexfruehwirth.at" target="_blank">alex frühwirth</a>
+</footer>
 </body>
 </html>

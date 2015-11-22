@@ -22,6 +22,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -95,8 +96,8 @@ body{
 }
 
 a{
-  color: #000;
-  text-decoration: none;
+  color: $primary-text-color;
+  text-decoration: underline;
 }
 
 h1{
@@ -107,10 +108,15 @@ h1{
 
 .section{
   @include clearfix;
+
+  &:nth-child(even){
+    background-color: $primary-color;
+  }
 }
 
 .narrow{
   margin: 0 auto;
+  padding: 0 20px;
   max-width: 1024px;
   @include clearfix;
 
@@ -161,7 +167,6 @@ h1{
 }
 
 .howto{
-  background-color: $primary-color;
   border-bottom: 5px solid $divider-color;
   overflow: hidden;
   &__wrapper{
@@ -174,11 +179,16 @@ h1{
 
   &__headline{
     @include headline-font(1.5em);
-    text-align: center;
+  }
+
+  &__description{
+    margin: 10px 0;
   }
 
   &__box{
-
+    padding: 20px;
+    background-color: #FFF;
+    word-break: break-all;
   }
 }
 
@@ -203,13 +213,27 @@ h1{
   }
 }
 
-body{
-  overflow: hidden;
+
+footer{
+  text-align: center;
+  padding: 20px 0;
+  background-color: $primary-text-color;
+  color: #FFF;
+
+  a{
+    color: #FFF;
+  }
+}
+
+
+header{
+  position: relative;
 }
 
 .menu{
   height: 50px;
   width: 100%;
+  overflow: hidden;
   &__toggle{
     display: block;
     width: 50px;
@@ -242,6 +266,7 @@ body{
       text-align: center;
       font-size: 1.3em;
       line-height: 30px;
+      text-decoration: none;
       -webkit-transition: background-color ease-in-out 0.2s;
       -moz-transition: background-color ease-in-out 0.2s;
       -ms-transition: background-color ease-in-out 0.2s;
