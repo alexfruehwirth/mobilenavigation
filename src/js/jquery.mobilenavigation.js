@@ -132,11 +132,15 @@
                 }
             },
             resize: function () {
-                if ($(window).width() < $plugin.settings.breakpoint) {
+                if (Setup.getMediaWidth() < $plugin.settings.breakpoint) {
                     Setup.init();
                 } else {
                     Setup.destroy();
                 }
+            },
+            getMediaWidth: function() {
+                var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                return width;
             }
         }
 
