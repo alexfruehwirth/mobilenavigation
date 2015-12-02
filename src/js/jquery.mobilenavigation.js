@@ -73,7 +73,7 @@
 
         // Initializes whole plugin
         var init = function () {
-            $plugin.settings = $.extend({}, defaults, options);
+            $plugin.settings = $.extend({}, defaults, options, Setup.getDataOptions());
 
             //If breakpoint is set in options, initialize on resize for set breakpoint
             if ($plugin.settings.breakpoint != null) {
@@ -141,6 +141,17 @@
             getMediaWidth: function() {
                 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
                 return width;
+            },
+            getDataOptions: function(){
+                var options = {}
+                $.each(defaults, function(k,v){
+                    var data = $plugin.data('mobilenavigation-'+k);
+                    if(typeof data != 'undefined'){
+                        options[k] = data;
+                    }
+                });
+
+                return options;
             }
         }
 
