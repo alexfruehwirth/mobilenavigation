@@ -61,6 +61,10 @@
             back: 'Back',
             cssAnimation: true,
             debug: false,
+            onInit: function(){
+            },
+            onDestroy: function(){
+            },
             onForward: function () {
             },
             onBack: function () {
@@ -96,6 +100,7 @@
                     this.iterateListElements($rootList, 0);
                     Listeners.add();
                     $plugin.initialized = true;
+                    $plugin.settings.onInit.call($plugin, $rootList);
                     debug("Plugin initialized");
                 }
 
@@ -128,6 +133,7 @@
                         return (css.match(/mobilenavigation([^\s]*)/g) || []).join(' ');
                     });
                     $plugin.initialized = false;
+                    $plugin.settings.onDestroy.call($plugin);
                     debug("Plugin destroyed");
                 }
             },
