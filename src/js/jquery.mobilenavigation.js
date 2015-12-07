@@ -5,7 +5,7 @@
  *
  *  author: alexfruehwirth
  *  repo: https://github.com/alexfruewhwirth/mobilenavigation
- *  version: 0.8
+ *  version: 1.0
  */
 
 
