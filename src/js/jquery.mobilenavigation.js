@@ -111,7 +111,7 @@
                     var $link = $list.prev('a').length ? $list.prev('a') : $list.next('a');
                     var $orginList = $('<li class="' + constants.originClass + '" ></li>').prependTo($list);
                     $link.clone().prependTo($orginList);
-                    $('<li><a href="#" class="' + constants.backClass + '">' + $plugin.settings.back + '</a></li>').prependTo($list);
+                    $('<li class="' + constants.backClass + '"><a href="#">' + $plugin.settings.back + '</a></li>').prependTo($list);
                 }
 
                 $list.addClass(constants.levelClass + ' ' + constants.levelClass + '--' + level);
@@ -167,7 +167,7 @@
                     e.preventDefault();
                     Animation.forward($(this));
                 });
-                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.' + constants.backClass, function (e) {
+                $('.' + constants.rootClass).on('click.' + constants.eventPrefix + '-back', '.' + constants.backClass + ' > a', function (e) {
                     e.preventDefault();
                     Animation.back($(this));
                 });
